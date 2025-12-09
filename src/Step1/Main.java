@@ -36,13 +36,13 @@ public class Main {
            }
 
            System.out.println("계산 결과 : " + result);
-           System.out.println("더 계산하시겠습니까? (no 입력 시 종료)");
+           System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
            System.out.println("공백 입력시 계산기 다시 실행");
 
            stdin.nextLine(); // 개행문자 버퍼가 남아있는것 같음
            String userResult = stdin.nextLine();
 
-           if (userResult.equals("no")) {
+           if (userResult.equals("exit")) {
                break;
            }
            else {
