@@ -1,6 +1,7 @@
 package Step3;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,26 +13,33 @@ public class Main {
         Scanner stdin = new Scanner(System.in);
 
         while (true) {
-
+            double num1, num2;
             OperatorType op = null;
-            System.out.println("첫 번째 숫자를 입력하세요 : ");
-            double num1 = stdin.nextDouble();
-            System.out.println("두 번째 숫자를 입력하세요 : ");
-            double num2 = stdin.nextDouble();
 
-            System.out.println("연산을 원하는 기호를 입력해주세요 : ");
-            char symbol = stdin.next().charAt(0);
+            try {
+                System.out.println("첫 번째 숫자를 입력하세요 : ");
+                num1 = stdin.nextDouble();
+                System.out.println("두 번째 숫자를 입력하세요 : ");
+                num2 = stdin.nextDouble();
+
+                System.out.println("연산을 원하는 기호를 입력해주세요 : ");
+                char symbol = stdin.next().charAt(0);
 
 
-            if (symbol == '+') {
-                op= OperatorType.ADD;
-            }else if (symbol == '-') {
-                op= OperatorType.SUB;
-            }else if (symbol == '*') {
-                op= OperatorType.MUL;
-            }else if (symbol == '/') {
-                op= OperatorType.DIV;
+                if (symbol == '+') {
+                    op = OperatorType.ADD;
+                } else if (symbol == '-') {
+                    op = OperatorType.SUB;
+                } else if (symbol == '*') {
+                    op = OperatorType.MUL;
+                } else if (symbol == '/') {
+                    op = OperatorType.DIV;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("잘못된 입력 입니다.");
+                continue;
             }
+
 
             calculator.calculate(num1, num2, op);
 
@@ -51,14 +59,11 @@ public class Main {
 
             if (userResult.equals("exit")) {
                 break;
-            }
-            else if (userResult.equals("history")) {
+            } else if (userResult.equals("history")) {
                 System.out.println("History : " + resultlist);
-            }
-            else if (userResult.equals("remove")) {
+            } else if (userResult.equals("remove")) {
                 calculator.removeResult();
-
-            }else if (userResult.equals("search")) {
+            } else if (userResult.equals("search")) {
                 System.out.println("기준값을 입력하세요");
                 double key = stdin.nextDouble();
                 List<Double> searchResult = calculator.searchResult(key);
